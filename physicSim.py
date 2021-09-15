@@ -1,6 +1,8 @@
 # import the pygame module, so you can use it
 import pygame
- 
+
+
+
 # define a main function
 def main():
      
@@ -11,7 +13,7 @@ def main():
     pygame.display.set_caption("minimal program")
 
     # create a surface on screen that has the size of 300 x 200
-    (width, height) = (300, 200)
+    (width, height) = (1000, 600)
     screen = pygame.display.set_mode((width, height))
 
     #set a background color
@@ -22,6 +24,17 @@ def main():
     running = True
 
     pygame.display.flip()
+
+    clock = pygame.time.Clock()
+
+    # Game FPS
+    FPS = 60
+
+    # Set circle position and velocity
+    circle_x_pos = 250
+    circle_y_pos = 250
+    circle_x_vel = 150
+    circle_y_vel = 20
      
     # main loop
     while running:
@@ -31,8 +44,18 @@ def main():
             if event.type == pygame.QUIT:
                 # change the value to False, to exit the main loop
                 running = False
-     
-     
+
+        clock.tick(FPS)
+
+        screen.fill(background_color)
+        pygame.draw.circle(screen, (255,0,0), (int(circle_x_pos), int(circle_y_pos)), 50)
+
+        # Update circle position
+        circle_x_pos += circle_x_vel / FPS
+        circle_y_pos += circle_y_vel / FPS
+
+        pygame.display.update()
+
 # run the main function only if this module is executed as the main script
 # (if you import this as a module then nothing is executed)
 if __name__=="__main__":
