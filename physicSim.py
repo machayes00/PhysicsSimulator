@@ -54,14 +54,18 @@ def main():
             circle_x_vel *= -1
         if(circle_y_pos+circle_radius >= height):
             circle_y_vel *= -.5
-        # Update circle position
+        if(0 <= circle_y_vel <= .1): #effect of hitting the ground
+            circle_y_pos = height - circle_radius
+            circle_y_vel = 0
+            circle_x_vel*= .5 #friction coefficient
+        else:
+            circle_y_pos += circle_y_vel / FPS
+            circle_y_vel += 0
         circle_x_pos += circle_x_vel / FPS
-        circle_y_pos += circle_y_vel / FPS
-        circle_y_vel+=2
+        
 
         pygame.draw.circle(screen, (255,0,0), (int(circle_x_pos), int(circle_y_pos)), int(circle_radius))
         
-
         pygame.display.update()
 
 # run the main function only if this module is executed as the main script
